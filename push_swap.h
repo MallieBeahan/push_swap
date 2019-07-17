@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/14 19:08:16 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/17 21:42:06 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct	s_stack
 {
     int				num;
+    int             filled;
     struct s_stack	*next;
 }				t_stack;
 
@@ -35,8 +36,16 @@ void 	rr(t_stack *stack_a, t_stack *stack_b);
 void 	rra(t_stack *stack_a, int print);
 void 	rrb(t_stack *stack_b, int print);
 void    rrr(t_stack *stack_a, t_stack *stack_b);
-void	ft_lstadd(t_stack **stack, t_stack *new, int num);
+void	ft_lstadd(t_stack **stack, t_stack *new, int num, int filled);
 void    print_stack(t_stack *stack);
-
+int     lst_size(t_stack *stack);
+void    first_case(t_stack **stack_a);
+t_stack *create_b(int size);
+void second_case(t_stack *stack_a, t_stack *stack_b, int size);
+int find_digit(t_stack *lst,int size);
+void help_func_ten(int first, int second, t_stack *stack_a, int size, t_stack *stack_b);
+int check_digit(t_stack *stack_a, int digit, int check);
+void help_func_less(int first, t_stack *stack_a, int size, t_stack *stack_b);
+void push_b_to_a(t_stack *a, t_stack *b, int size);
 
 #endif

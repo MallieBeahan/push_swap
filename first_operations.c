@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:52:06 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/14 19:29:08 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/17 22:24:51 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,34 @@ void	ss(t_stack *stack_a, t_stack *stack_b)
 
 void	pa(t_stack *stack_a, t_stack *stack_b)
 {
-	if(stack_a && stack_b && stack_b->num)
+    while(!stack_b->filled && stack_b->next)
+        stack_b = stack_b->next;
+    while(stack_b->next)
+        stack_a = stack_a->next;
+	if(stack_a && stack_b && stack_b->num && stack_b->filled)
 	{
+        rra(stack_a, 0);
         stack_a->num = stack_b->num;
         stack_b->num = 0;
+        stack_b->filled = 0;
+        stack_a->filled = 1;
         write(1, "pa\n", 3);
 	}
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
 {
-	if(stack_a && stack_b && stack_a->num)
+    while(!stack_a->filled && stack_a->next)
+        stack_a = stack_a->next;
+    while(stack_a->next)
+        stack_a = stack_a->next;
+	if(stack_a && stack_b && stack_a->num && stack_a->filled)
 	{
+        rrb(stack_b, 0);
         stack_b->num = stack_a->num;
         stack_a->num = 0;
+        stack_a->filled = 0;
+        stack_b->filled = 1;
         write(1, "pb\n", 3);
 	}
 }
