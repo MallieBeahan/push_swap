@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:06:00 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/17 21:24:21 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/18 20:56:33 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@ int main (int ac, char **av)
 {
     t_stack *a;
     t_stack *node;
-    t_stack *b;
     int i = 0;
     int j = 2;
     int size;
     size = 0;
-
     a = ft_memalloc(sizeof(a));
-    a->num = av[1][0] - '0';
-    a->filled = 1;
+    a->num = ft_atoi(&av[1][0]);
     a->next = NULL;
     while(i < ac - 2)
     {
         node = ft_memalloc(sizeof(node));
-        ft_lstadd(&a, node, av[j][0] - '0', 1);
+        ft_lstadd(&a, node, ft_atoi(&av[j][0]));
         j++;
         i++;
     }
@@ -38,11 +35,8 @@ int main (int ac, char **av)
         sa(a, 1);
     if (size == 3)
         first_case(&a);
-    if (size > 3 && size < 10)
-    {
-        b = create_b(size);
-        second_case(a, b, size);
-    }
+    if (size > 3 && size < 101)
+        second_case(a, size);
     // printf("Your default stack is :\n");
     // print_stack(a);
     // printf("\nYour stack after operation is :\n");

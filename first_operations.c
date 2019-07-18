@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:52:06 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/17 22:24:51 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/18 20:15:05 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,36 +54,68 @@ void	ss(t_stack *stack_a, t_stack *stack_b)
     }
 }
 
-void	pa(t_stack *stack_a, t_stack *stack_b)
+t_stack	*pa(t_stack *stack_a, t_stack *stack_b)
 {
-    while(!stack_b->filled && stack_b->next)
+    t_stack *tmp;
+    t_stack *node;
+    int size;
+
+    if (stack_b)
+        size = lst_size(stack_b);
+    while (stack_b->next && stack_b->next->next)
         stack_b = stack_b->next;
-    while(stack_b->next)
-        stack_a = stack_a->next;
-	if(stack_a && stack_b && stack_b->num && stack_b->filled)
+    tmp = stack_b;
+    if (size > 1)
+        stack_b = stack_b->next;
+    if(stack_a && stack_b && stack_b->num)
 	{
-        rra(stack_a, 0);
-        stack_a->num = stack_b->num;
-        stack_b->num = 0;
-        stack_b->filled = 0;
-        stack_a->filled = 1;
+        node = ft_memalloc(sizeof(node));
+        ft_lstadd(&stack_a, node, stack_b->num);
+        free(stack_b);
+        tmp->next = NULL;
         write(1, "pa\n", 3);
 	}
+    if (!stack_a)
+    {
+        stack_a = ft_memalloc(sizeof(stack_a));
+        stack_a->num = stack_b->num;
+        stack_a->next = NULL;
+        free(stack_b);
+        tmp->next = NULL;
+        write(1, "pa\n", 3);
+    }
+    return (stack_a);
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+t_stack	*pb(t_stack *stack_a, t_stack *stack_b)
 {
-    while(!stack_a->filled && stack_a->next)
+    t_stack *tmp;
+    t_stack *node;
+    int size;
+
+    if (stack_a)
+        size = lst_size(stack_a);
+    while (stack_a->next && stack_a->next->next)
         stack_a = stack_a->next;
-    while(stack_a->next)
+    tmp = stack_a;
+    if (size > 1)
         stack_a = stack_a->next;
-	if(stack_a && stack_b && stack_a->num && stack_a->filled)
+    if(stack_a && stack_b && stack_a->num)
 	{
-        rrb(stack_b, 0);
-        stack_b->num = stack_a->num;
-        stack_a->num = 0;
-        stack_a->filled = 0;
-        stack_b->filled = 1;
+        node = ft_memalloc(sizeof(node));
+        ft_lstadd(&stack_b, node, stack_a->num);
+        free(stack_a);
+        tmp->next = NULL;
         write(1, "pb\n", 3);
 	}
+    if (!stack_b)
+    {
+        stack_b = ft_memalloc(sizeof(stack_b));
+        stack_b->num = stack_a->num;
+        stack_b->next = NULL;
+        free(stack_a);
+        tmp->next = NULL;
+        write(1, "pb\n", 3);
+    }
+    return (stack_b);
 }

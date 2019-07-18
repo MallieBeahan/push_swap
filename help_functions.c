@@ -6,22 +6,32 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:08:50 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/17 21:42:39 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/18 21:40:12 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstadd(t_stack **stack, t_stack *new, int num, int filled)
+t_stack *ft_lstnew(t_stack **stack, int num)
+{
+	t_stack *new_list;
+
+	new_list = (t_stack *)ft_memalloc(sizeof(t_stack));
+	if (new_list == NULL)
+		return (NULL);
+	else
+		new_list->num = num;
+	new_list->next = NULL;
+    *stack = new_list;
+    return ((*stack));
+}
+
+void	ft_lstadd(t_stack **stack, t_stack *new, int num)
 {
 	if (stack && new)
 	{
         new->next = *stack;
         new->num = num;
-        if (filled)
-            new->filled = 1;
-        else
-            new->filled = 0;
 		*stack = new;
             
 	}
@@ -53,23 +63,6 @@ void print_stack(t_stack *stack)
     printf("%d", stack->num);
 }
 
-t_stack *create_b(int size)
-{
-    t_stack *b;
-    t_stack *node;
-    int i;
-
-    i = 0;
-    b = ft_memalloc(sizeof(b));
-    while (i < size - 1)
-    {
-        node = ft_memalloc(sizeof(node));
-        ft_lstadd(&b, node, 0, 0);
-        i++;
-    }
-    return (b);
-}
-
 int find_digit(t_stack *lst,int size)
 {
     int digit;
@@ -92,21 +85,27 @@ int check_digit(t_stack *stack_a, int digit, int check)
 {
     while(stack_a)
     {
-        if (digit >= stack_a->num && stack_a->filled)
+        if (digit >= stack_a->num)
             return (digit);
         stack_a = stack_a->next;
     }
     return (digit + check);
 }
 
-void push_b_to_a(t_stack *a, t_stack *b, int size)
+int what_to_do(int pos_first, int pos_second, int size)
 {
-    int i;
+    int first;
+    int second;
 
-    i = 0;
-    while (i < size)
-    {
-        pa(a, b);
-        i++;
-    }
+    if (pos_first >= size / 2)
+        first = size - pos_first;
+    else
+        first = pos_first;
+    if (pos_second >= size / 2)
+        second = size - pos_second;
+    else
+        second = pos_second;
+    if (first > second)
+        return (1);
+    return (0);
 }
