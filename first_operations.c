@@ -6,116 +6,133 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:52:06 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/18 20:15:05 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/22 23:08:17 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack *stack_a, int print)
+t_list	*sa(t_list *lst, int print)
 {
-    int first;
-    int second;
+    int tmp;
+    int i;
 
-    if (stack_a->next)
+
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_a[0] && lst->stack_a[1])
     {
-        first = stack_a->num;
-        second = stack_a->next->num;
-        stack_a->num = second;
-        stack_a->next->num = first;
+        while (i < lst->size_a - 2)
+            i++;
+        tmp = lst->stack_a[i];
+        lst->stack_a[i] = lst->stack_a[i + 1];
+        lst->stack_a[i + 1] = tmp;
         if (print)
             write(1, "sa\n", 3);
     }
+    return (lst);
 }
 
-void	sb(t_stack *stack_b, int print)
+t_list	*sb(t_list *lst, int print)
 {
-    int first;
-    int second;
+    int tmp;
+    int i;
 
-    if (stack_b->next)
+
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_b[0] && lst->stack_b[1])
     {
-        first = stack_b->num;
-        second = stack_b->next->num;
-        stack_b->num = second;
-        stack_b->next->num = first;
+        while (i < lst->size_b - 2)
+            i++;
+        tmp = lst->stack_b[i];
+        lst->stack_b[i] = lst->stack_b[i + 1];
+        lst->stack_b[i + 1] = tmp;
         if (print)
             write(1, "sb\n", 3);
     }
+    return (lst);
 }
 
-void	ss(t_stack *stack_a, t_stack *stack_b)
+t_list	*ss(t_list *lst)
 {
-    if (stack_a && stack_b)
+    if (lst->stack_a && lst->stack_b)
     {
-        sa(stack_a, 0);
-        sb(stack_b, 0);
+        sa(lst, 0);
+        sb(lst, 0);
         write(1, "ss\n", 3);
     }
+    return (lst);
 }
 
-t_stack	*pa(t_stack *stack_a, t_stack *stack_b)
+t_list *pa(t_list *lst)
 {
-    t_stack *tmp;
-    t_stack *node;
-    int size;
+    int i;
+    int *new_b;
+    int *new_a;
 
-    if (stack_b)
-        size = lst_size(stack_b);
-    while (stack_b->next && stack_b->next->next)
-        stack_b = stack_b->next;
-    tmp = stack_b;
-    if (size > 1)
-        stack_b = stack_b->next;
-    if(stack_a && stack_b && stack_b->num)
-	{
-        node = ft_memalloc(sizeof(node));
-        ft_lstadd(&stack_a, node, stack_b->num);
-        free(stack_b);
-        tmp->next = NULL;
-        write(1, "pa\n", 3);
-	}
-    if (!stack_a)
+    lst->size_a++;
+    lst->size_b--;
+    i = 0;
+    if (lst && lst->stack_a && lst->stack_b && lst->stack_b[0])
     {
-        stack_a = ft_memalloc(sizeof(stack_a));
-        stack_a->num = stack_b->num;
-        stack_a->next = NULL;
-        free(stack_b);
-        tmp->next = NULL;
+        while (i < lst->size_b)
+            i++;
+        new_a = dup_stack(lst->stack_a, lst->size_a);
+        new_a[lst->size_a] = lst->stack_b[i];
+        free(lst->stack_a);
+        lst->stack_a = new_a;
+        new_b = dup_stack(lst->stack_b, lst->size_b);
+        free(lst->stack_b);
+        lst->stack_b = new_b;
         write(1, "pa\n", 3);
     }
-    return (stack_a);
+    else
+    {
+        lst->stack_a = (int *)ft_memalloc(sizeof(int) * lst->size_a);
+        while (i < lst->size_b)
+            i++;
+        lst->stack_a[0] = lst->stack_b[i];
+        new_b = dup_stack(lst->stack_b, lst->size_b);
+        free(lst->stack_b);
+        lst->stack_b = new_b;
+        write(1, "pa\n", 3);
+    }
+    return (lst);
 }
 
-t_stack	*pb(t_stack *stack_a, t_stack *stack_b)
+t_list *pb(t_list *lst)
 {
-    t_stack *tmp;
-    t_stack *node;
-    int size;
+    int i;
+    int *new_b;
+    int *new_a;
 
-    if (stack_a)
-        size = lst_size(stack_a);
-    while (stack_a->next && stack_a->next->next)
-        stack_a = stack_a->next;
-    tmp = stack_a;
-    if (size > 1)
-        stack_a = stack_a->next;
-    if(stack_a && stack_b && stack_a->num)
-	{
-        node = ft_memalloc(sizeof(node));
-        ft_lstadd(&stack_b, node, stack_a->num);
-        free(stack_a);
-        tmp->next = NULL;
-        write(1, "pb\n", 3);
-	}
-    if (!stack_b)
+    lst->size_a--;
+    lst->size_b++;
+    i = 0;
+    if (lst && lst->stack_a && lst->stack_b && lst->stack_a[0])
     {
-        stack_b = ft_memalloc(sizeof(stack_b));
-        stack_b->num = stack_a->num;
-        stack_b->next = NULL;
-        free(stack_a);
-        tmp->next = NULL;
+        while (i < lst->size_a)
+            i++;
+        new_b = dup_stack(lst->stack_b, lst->size_b);
+        new_b[lst->size_b] = lst->stack_a[i];
+        free(lst->stack_b);
+        lst->stack_b = new_b;
+        new_a = dup_stack(lst->stack_a, lst->size_a);
+        free(lst->stack_a);
+        lst->stack_a = new_a;
         write(1, "pb\n", 3);
     }
-    return (stack_b);
+    else
+    {
+        lst->stack_b = (int *)ft_memalloc(sizeof(int) * lst->size_b);
+        while (i < lst->size_a)
+            i++;
+        lst->stack_b[0] = lst->stack_a[i];
+        new_a = dup_stack(lst->stack_a, lst->size_a);
+        free(lst->stack_a);
+        lst->stack_a = new_a;
+        write(1, "pb\n", 3);
+    }
+    return (lst);
 }

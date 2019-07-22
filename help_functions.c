@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 16:08:50 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/18 21:40:12 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/22 21:15:33 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,43 @@ int what_to_do(int pos_first, int pos_second, int size)
         second = size - pos_second;
     else
         second = pos_second;
-    if (first > second)
+    if (first >= second)
         return (1);
     return (0);
+}
+
+t_stack *push_second_digit(int pos, t_stack *stack_a, t_stack *stack_b, int size)
+{
+    if (size / 2 >= pos)
+    {
+        while (pos)
+        {
+            ra(stack_a, 1);
+            pos--;
+        }
+        stack_b = pb(stack_a, stack_b);
+    }
+    else
+    {
+        while (size - pos)
+        {
+            rra(stack_a, 1);
+            pos++;
+        }
+        stack_b = pb(stack_a, stack_b);
+    }
+    return (stack_b);
+}
+
+int find_pos(t_stack *stack, int digit)
+{
+    int pos;
+
+    pos = 1;
+    while(stack->next && stack->num != digit)
+    {
+        stack = stack->next;
+        pos++;
+    }
+    return (pos);
 }

@@ -6,108 +6,122 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:52:49 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/18 20:19:22 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/22 23:44:59 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rra(t_stack *stack_a, int print)
+t_list *rr(t_list *lst)
 {
-    int tmp;
-    t_stack *start;
-    
-    if (stack_a && stack_a->next)
+    if (lst)
     {
-        start = stack_a;
-        while (stack_a->next)
-        {
-            stack_a = stack_a->next;
-            tmp = stack_a->num;
-            stack_a->num = start->num;
-            start->num = tmp;
-        }
-        if (print)
-            write(1, "rra\n", 4);
-    }
-}
-
-void rrb(t_stack *stack_b, int print)
-{
-    int tmp;
-    t_stack *start;
-    
-    if (stack_b && stack_b->next)
-    {
-        start = stack_b;
-        while (stack_b->next)
-        {
-            stack_b = stack_b->next;
-            tmp = stack_b->num; // при последнем разе тут сега т.к stack_b пустой 
-            stack_b->num = start->num;
-            start->num = tmp;
-        }
-        if (print)
-            write(1, "rra\n", 4);
-    }
-}
-
-void rrr(t_stack *stack_a, t_stack *stack_b)
-{
-    if (stack_a && stack_b)
-    {
-        rra(stack_a, 0);
-        rrb(stack_b, 0);
-        write(1, "rrr\n", 3);
-    }
-}
-
-void ra(t_stack *stack_a, int print)
-{
-    int first;
-
-    if (stack_a && stack_a->next)
-    {
-        first = stack_a->num;
-        while(stack_a->next->next)
-        {
-            stack_a->num = stack_a->next->num;
-            stack_a = stack_a->next;
-        }
-        stack_a->num = stack_a->next->num;
-        stack_a = stack_a->next;
-        stack_a->num = first;
-        if (print)
-            write(1, "ra\n", 3);
-    }
-}
-
-void rb(t_stack *stack_b, int print)
-{
-    int first;
-
-    if (stack_b && stack_b->next)
-    {
-        first = stack_b->num;
-        while(stack_b->next->next)
-        {
-            stack_b->num = stack_b->next->num;
-            stack_b = stack_b->next;
-        }
-        stack_b->num = stack_b->next->num;
-        stack_b = stack_b->next;
-        stack_b->num = first;
-        if (print)
-            write(1, "ra\n", 3);
-    }
-}
-
-void rr(t_stack *stack_a, t_stack *stack_b)
-{
-    if (stack_a && stack_b)
-    {
-        ra(stack_a, 0);
-        rb(stack_a, 0);
+        ra(lst, 0);
+        rb(lst, 0);
         write(1, "rr\n", 3);
     }
+    return (lst);
+}
+
+t_list *ra(t_list *lst, int print)
+{
+    int tmp;
+    int i;
+    
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_a[0] && lst->stack_a[1])
+    {
+        while (i < lst->size_a - 1)
+            i++;
+        while (i)
+        {
+            tmp = lst->stack_a[i];
+            lst->stack_a[i] = lst->stack_a[i - 1];
+            lst->stack_a[i - 1] = tmp;
+            i--;
+        }
+        if (print)
+            write(1, "ra\n", 4);
+    }
+    return (lst);
+}
+
+t_list *rb(t_list *lst, int print)
+{
+    int tmp;
+    int i;
+    
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_b[0] && lst->stack_b[1])
+    {
+        while (i < lst->size_b - 1)
+            i++;
+        while (i)
+        {
+            tmp = lst->stack_b[i];
+            lst->stack_b[i] = lst->stack_b[i - 1];
+            lst->stack_b[i - 1] = tmp;
+            i--;
+        }
+        if (print)
+            write(1, "rb\n", 4);
+    }
+    return (lst);
+}
+
+t_list *rrr(t_list *lst)
+{
+    if (lst)
+    {
+        rra(lst, 0);
+        rrb(lst, 0);
+        write(1, "rrr\n", 3);
+    }
+    return(lst);
+}
+
+t_list *rra(t_list *lst, int print)
+{
+    int tmp;
+    int i;
+
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_a[0] && lst->stack_a[1])
+    {
+        while(i < lst->size_a - 1)
+        {
+            tmp = lst->stack_a[i];
+            lst->stack_a[i] = lst->stack_a[i + 1];
+            lst->stack_a[i + 1] = tmp;
+            i++;
+        }
+        if (print)
+            write(1, "rra\n", 3);
+    }
+    return (lst);
+}
+
+t_list *rrb(t_list *lst, int print)
+{
+    int tmp;
+    int i;
+
+    i = 0;
+    tmp = 0;
+    if (lst && lst->stack_b[0] && lst->stack_b[1])
+    {
+        while(i < lst->size_b - 1)
+        {
+            tmp = lst->stack_b[i];
+            lst->stack_b[i] = lst->stack_b[i + 1];
+            lst->stack_b[i + 1] = tmp;
+            i++;
+        }
+        if (print)
+            write(1, "rrb\n", 3);
+    }
+    return (lst);
 }

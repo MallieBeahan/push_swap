@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 19:49:28 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/18 22:13:12 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/22 19:11:08 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void second_case(t_stack *stack_a, int size)
             stack_b = help_func_ten(first, second, start, stack_b, size); // если он кидает в стек б второе число по величине обработать и обработать чтобы постоянно не искал первое и второе
         heap = check_digit(start, heap, check);
         stack_a = start;
-        size--;
+        if (check == 1)
+            size--;
+        else
+            size -= 2;
     }
     size = lst_size(stack_b);
     while(stack_b && size >= 1)
@@ -96,7 +99,7 @@ t_stack *help_func_ten(int first, int second, t_stack *stack_a, t_stack *stack_b
     count = 1;
     pos_first = 0;
     pos_second = 0;
-    while (stack_a)
+    while (stack_a->next)
     {
         if (stack_a->num == first)
             pos_first = count;
@@ -107,21 +110,16 @@ t_stack *help_func_ten(int first, int second, t_stack *stack_a, t_stack *stack_b
     }
     if (what_to_do(pos_first, pos_second, size) == 0)
     {
-        while(size - pos_first)
-        {
-            rra(start, 1);
-            pos_first++;
-        }
-        stack_b = pb(start, stack_b);
+        stack_b = push_second_digit(pos_first, start, stack_b, size);
+        pos_second = find_pos(start, second);
+        stack_b = push_second_digit(pos_second, start, stack_b, size);
     }
     else
     {
-        while (pos_second)
-        {
-            ra(start, 1);
-            pos_second--;
-        }
-        stack_b = pb(start, stack_b);
+        stack_b = push_second_digit(pos_second, start, stack_b, size);
+        pos_first = find_pos(start, first);
+        stack_b = push_second_digit(pos_first, start, stack_b, size);
+        sb(stack_b, 1);
     }
     return (stack_b);
 }
