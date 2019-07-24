@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/24 19:26:10 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/24 21:56:02 by mbeahan          ###   ########.fr       */
+/*   Created: 2018/12/08 17:06:19 by mbeahan           #+#    #+#             */
+/*   Updated: 2019/07/24 19:31:16 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main (int ac, char **av)
+void	ft_putendl_fd(char const *s, int fd)
 {
-    t_list *lst;
+	int i;
 
-    lst = (t_list *)malloc(sizeof(lst));
-    //ac == 0 ? ft_putendl_fd("Error\n", 2) : 0;
-    if (ac > 1)
-    {
-        initialize(lst, ac);
-        lst = fill_lst(lst, ac, av);
-        pb(lst, 1);
-        // sort(lst);
-    }
+	i = 0;
+	if (s)
+	{
+		ft_putstr_fd(s, fd);
+		ft_putchar_fd('\n', fd);
+	}
 }

@@ -5,143 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/14 16:08:50 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/22 21:15:33 by mbeahan          ###   ########.fr       */
+/*   Created: 2019/07/24 19:49:32 by mbeahan           #+#    #+#             */
+/*   Updated: 2019/07/24 21:30:49 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *ft_lstnew(t_stack **stack, int num)
+void	initialize(t_list *lst, int ac)
 {
-	t_stack *new_list;
-
-	new_list = (t_stack *)ft_memalloc(sizeof(t_stack));
-	if (new_list == NULL)
-		return (NULL);
-	else
-		new_list->num = num;
-	new_list->next = NULL;
-    *stack = new_list;
-    return ((*stack));
+	lst->stack_a = (int *)malloc(sizeof(int) * ac - 1);
+	lst->stack_b = (int *)ft_memalloc(sizeof(int) * ac - 1);
+	lst->size_a = ac - 1;
+	lst->size_b = 0;
 }
 
-void	ft_lstadd(t_stack **stack, t_stack *new, int num)
+t_list	*fill_lst(t_list *lst, int ac, char **av)
 {
-	if (stack && new)
+    int i;
+    int j;
+
+    i = 0;
+    j = 1;
+    while (i < ac - 1)
+    {
+        lst->stack_a[i] = ft_atoi(av[j]);
+        i++;
+        j++;
+    }
+    return (lst);
+}
+
+void	rrr(t_list *lst)
+{
+    if (lst)
+    {
+        rra(lst, 0);
+        rrb(lst, 0);
+        write(1, "rrr\n", 4);
+    }
+}
+
+int	*copyarr(const int *arr, int k)
+{
+	int i;
+	int *copy;
+
+	i = 0;
+	copy = (int *)malloc(sizeof(int) * k + 1);
+	while (i < k)
 	{
-        new->next = *stack;
-        new->num = num;
-		*stack = new;
-            
+		copy[i] = arr[i];
+		i++;
 	}
+	return (copy);
 }
 
-int     lst_size(t_stack *stack)
+
+int		find_pivot(const int *arr, int size)
 {
-    int count;
+	int *new_arr;
+    int pivot;
 
-    count = 0;
-    if (stack)
-    {
-        while (stack)
-        {
-            stack= stack->next;
-            count++;
-        }
-    }
-    return (count);
-}
-
-void print_stack(t_stack *stack)
-{
-    while (stack->next)
-    {
-        printf("%d\n", stack->num);
-        stack = stack->next;
-    }
-    printf("%d", stack->num);
-}
-
-int find_digit(t_stack *lst,int size)
-{
-    int digit;
-    int sum;
-
-    sum = 0;
-    digit = 0;
-    while (lst)
-    {
-        sum += lst->num;
-        lst = lst->next;
-    }
-    digit = ((sum / size) / 2) * 0.8;
-    if (!digit)
-        return (1);
-    return (digit);
-}
-
-int check_digit(t_stack *stack_a, int digit, int check)
-{
-    while(stack_a)
-    {
-        if (digit >= stack_a->num)
-            return (digit);
-        stack_a = stack_a->next;
-    }
-    return (digit + check);
-}
-
-int what_to_do(int pos_first, int pos_second, int size)
-{
-    int first;
-    int second;
-
-    if (pos_first >= size / 2)
-        first = size - pos_first;
+    pivot = 0;
+    new_arr = copyarr(arr, size);
+    sort_arr(new_arr, size);
+    if (size % 2 == 0)
+        pivot = ((new_arr[size / 2] + new_arr[(size / 2) - 1]) / 2);
     else
-        first = pos_first;
-    if (pos_second >= size / 2)
-        second = size - pos_second;
-    else
-        second = pos_second;
-    if (first >= second)
-        return (1);
-    return (0);
-}
-
-t_stack *push_second_digit(int pos, t_stack *stack_a, t_stack *stack_b, int size)
-{
-    if (size / 2 >= pos)
-    {
-        while (pos)
-        {
-            ra(stack_a, 1);
-            pos--;
-        }
-        stack_b = pb(stack_a, stack_b);
-    }
-    else
-    {
-        while (size - pos)
-        {
-            rra(stack_a, 1);
-            pos++;
-        }
-        stack_b = pb(stack_a, stack_b);
-    }
-    return (stack_b);
-}
-
-int find_pos(t_stack *stack, int digit)
-{
-    int pos;
-
-    pos = 1;
-    while(stack->next && stack->num != digit)
-    {
-        stack = stack->next;
-        pos++;
-    }
-    return (pos);
+        pivot = new_arr[size / 2];
+    free(new_arr);
+    return (pivot);
 }
