@@ -6,11 +6,11 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 16:53:41 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/18 20:56:02 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/25 12:55:15 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int		ft_atoi(char *str)
 {

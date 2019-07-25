@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:05:52 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/24 22:01:45 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/25 13:00:11 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,9 @@ void	ss(t_list *lst)
 
 void	pa(t_list *lst, int print)
 {
-	int i;
-
 	if (lst->size_b == 0)
 		return ;
-	i = lst->size_a;
-	while (i-- > 0)
-		lst->stack_a[i + 1] = lst->stack_a[i];
-	lst->stack_a[0] = lst->stack_b[0];
-	i = 0;
-	while (i++ <= lst->size_b)
-		lst->stack_b[i - 1] = lst->stack_b[i];
+	lst->stack_a[lst->size_a + 1] = lst->stack_b[lst->size_b - 1];
 	lst->size_a++;
 	lst->size_b--;
 	if(print)
@@ -69,17 +61,9 @@ void	pa(t_list *lst, int print)
 
 void	pb(t_list *lst, int print)
 {
-	int i;
-
 	if (lst->size_a == 0)
 		return ;
-	i = lst->size_b;
-	while (i-- > 0)
-		lst->stack_b[i + 1] = lst->stack_b[i];
-	lst->stack_b[0] = lst->stack_a[0];
-	i = 0;
-	while (i++ <= lst->size_a - 1)
-		lst->stack_a[i - 1] = lst->stack_a[i];
+	lst->stack_b[lst->size_b] = lst->stack_a[lst->size_a - 1];
 	lst->size_b++;
 	lst->size_a--;
 	if(print)

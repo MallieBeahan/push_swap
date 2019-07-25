@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/24 21:36:40 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/25 13:09:43 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,20 @@ typedef struct s_list
     int size_b;
 }              t_list;
 
+typedef struct s_block
+{
+    int            ops;
+    struct s_block *next;
+    
+}              t_block;
+
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_memalloc(size_t size);
 void	ft_putendl_fd(char const *s, int fd);
 char	**ft_strsplit(char const *s, char c);
 int		ft_atoi(char *str);
+void	ft_lstadd(t_block **alst, t_block *new);
 void    initialize(t_list *lst, int ac);
 t_list	*fill_lst(t_list *lst, int ac, char **av);
 void 	sa(t_list *lst, int print);

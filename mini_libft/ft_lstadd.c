@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 13:57:43 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/25 12:55:23 by mbeahan          ###   ########.fr       */
+/*   Created: 2018/12/14 16:36:34 by mbeahan           #+#    #+#             */
+/*   Updated: 2019/07/25 13:09:30 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	*ft_memalloc(size_t size)
+void	ft_lstadd(t_block **alst, t_block *new)
 {
-	size_t			i;
-	unsigned char	*str;
-
-	i = 0;
-	str = (unsigned char *)malloc(sizeof(unsigned char) * size);
-	if (str)
+	if (alst && new)
 	{
-		while (i < size)
-		{
-			str[i] = '\0';
-			i++;
-		}
-		return (str);
+		new->next = *alst;
+		new->ops = 0;
+		*alst = new;
 	}
-	return (NULL);
 }

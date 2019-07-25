@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:26:10 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/24 21:56:02 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/25 12:56:21 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int main (int ac, char **av)
     {
         initialize(lst, ac);
         lst = fill_lst(lst, ac, av);
-        pb(lst, 1);
-        // sort(lst);
+        sort(lst);
     }
 }
