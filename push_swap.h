@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/25 13:09:43 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/29 20:47:57 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 
 typedef struct s_block
 {
-    int            ops;
+    int            bl_size;
     struct s_block *next;
     
 }              t_block;
@@ -55,5 +55,8 @@ int		*copyarr(const int *arr, int k);
 int		*sort_arr(int *arr, int size);
 int		find_pivot(const int *arr, int size);
 void	sort(t_list *lst);
+void	init_blocks(t_block *block, t_list *lst);
+int     dont_touch(t_block *block);
+t_block *needed_block(t_block *block);
 
 #endif
