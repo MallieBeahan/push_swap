@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:49:32 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/26 19:37:24 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/30 23:27:26 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	initialize(t_list *lst, int ac)
 {
-	lst->stack_a = (int *)malloc(sizeof(int) * ac - 1);
+	lst->stack_a = (int *)ft_memalloc(sizeof(int) * ac - 1);
 	lst->stack_b = (int *)ft_memalloc(sizeof(int) * ac - 1);
 	lst->size_a = ac - 1;
 	lst->size_b = 0;
@@ -27,12 +27,8 @@ t_list	*fill_lst(t_list *lst, int ac, char **av)
 
     i = 0;
     j = 1;
-    while (i < ac - 1)
-    {
-        lst->stack_a[i] = ft_atoi(av[j]);
-        i++;
-        j++;
-    }
+    while (i < lst->size_a)
+        lst->stack_a[i++] = ft_atoi(av[j++]);
     return (lst);
 }
 

@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/Users/mbeahan/Desktop/push_swap/a.out",
-            "args": ["3", "8", "18", "2", "5"],
+            "args": ["4" "3" "2"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

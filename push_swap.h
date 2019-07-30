@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/29 20:47:57 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/30 23:30:28 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void	sort(t_list *lst);
 void	init_blocks(t_block *block, t_list *lst);
 int     dont_touch(t_block *block);
 t_block *needed_block(t_block *block);
+void sort_three_elem(t_list *lst);
+int find_count(int *arr, int size, int med);
 
 #endif

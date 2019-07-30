@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:26:10 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/29 18:49:10 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/30 22:34:14 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main (int ac, char **av)
 {
     t_list *lst;
 
-    lst = (t_list *)malloc(sizeof(lst));
+    lst = (t_list *)malloc(sizeof(t_list));
     //ac == 0 ? ft_putendl_fd("Error\n", 2) : 0;
     if (ac > 1)
     {
