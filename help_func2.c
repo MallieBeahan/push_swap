@@ -6,11 +6,24 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:25:24 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/31 22:36:23 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 22:43:32 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void print_stack(t_list *lst)
+{
+    int i;
+
+    i = 0;
+    printf("Your stack is:\n");
+    while (i < lst->size_a)
+    {
+        printf("%d\n", lst->stack_a[i]);
+        i++;
+    }
+}
 
 int *sort_arr(int *arr, int size)
 {
