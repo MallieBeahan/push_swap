@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/31 21:26:50 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 22:36:18 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct s_list
     int size_b;
     int bl_a_count;
     int bl_b_count;
+    int sort_in_a;
 }              t_list;
 
 typedef struct s_block
 {
-    int            sort_in_a;
     int            *blocks;
     int            i;
 }              t_block;
@@ -39,7 +39,7 @@ void	*ft_memalloc(size_t size);
 void	ft_putendl_fd(char const *s, int fd);
 char	**ft_strsplit(char const *s, char c);
 int		ft_atoi(char *str);
-void	ft_lstadd(t_block **alst, t_block *new);
+void	ft_bzero(void *s, size_t n);
 void    initialize(t_list *lst, int ac);
 t_list	*fill_lst(t_list *lst, int ac, char **av);
 void 	sa(t_list *lst, int print);
@@ -57,14 +57,12 @@ int		*copyarr(const int *arr, int k);
 int		*sort_arr(int *arr, int size);
 int		find_pivot(const int *arr, int size);
 void	sort(t_list *lst);
-void	init_blocks(t_block *block, t_list *lst);
-int     dont_touch(t_block *block);
-t_block *needed_block(t_block *block);
-void    sort_three_elem(t_list *lst, t_block *a_block);
-void    clear_stack_a(t_list *lst, t_block *a_block, t_block *b_block);
-void    clear_stack_b(t_list *lst, t_block *a_block, t_block *b_block);
-void    sort_stack_a(t_list *lst, t_block *a_block, int size);
+int     dont_touch(t_block block);
+void    sort_three_elem(t_list *lst, t_block blocks);
+void    clear_stack_a(t_list *lst, t_block blocks);
+void    clear_stack_b(t_list *lst, t_block blocks);
+void    sort_stack_a(t_list *lst, t_block blocks, int size);
 int     find_count(const int *stack, int size, int pivot);
-void    clear_stack_more(t_list *lst, t_block *a_block, t_block *b_block);
+void    clear_stack_more(t_list *lst, t_block blocks);
 void    restore_stack(t_list *lst, int count);
 #endif

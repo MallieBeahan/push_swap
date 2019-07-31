@@ -6,13 +6,13 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:31:12 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/31 21:35:07 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 22:38:54 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void clear_stack_more(t_list *lst, t_block *a_block, t_block *b_block)
+void clear_stack_more(t_list *lst, t_block blocks)
 {
     int pivot;
     int count;
@@ -20,15 +20,8 @@ void clear_stack_more(t_list *lst, t_block *a_block, t_block *b_block)
     t_block *node;
 
     i = 0;
-    pivot = find_pivot((const int *)lst->stack_a, lst->size_a - a_block->bl_size);
-    count = find_count((const int *)lst->stack_a, lst->size_a - a_block->bl_size, pivot);
-    if (lst->bl_b_count == 0)
-        b_block = (t_block *)ft_memalloc(sizeof(t_block));
-    else 
-    {
-        node =(t_block *)ft_memalloc(sizeof(t_block));
-        ft_lstadd(&b_block, node);
-    }
+    pivot = find_pivot((const int *)lst->stack_a, lst->size_a - lst->sort_in_a);
+    count = find_count((const int *)lst->stack_a, lst->size_a - lst->sort_in_a, pivot);
     while (count)
     {
         if (lst->stack_a[0] <= pivot)
@@ -43,8 +36,8 @@ void clear_stack_more(t_list *lst, t_block *a_block, t_block *b_block)
         }
     }
     restore_stack(lst, i);
-    if (lst->size_a - a_block->bl_size <= 3)
-        sort_stack_a(lst, a_block, lst->size_a - a_block->bl_size);
+    if (lst->size_a - lst->sort_in_a <= 3)
+        sort_stack_a(lst, blocks, lst->size_a - lst->sort_in_a);
 }
 
 int find_count(const int *stack, int size, int pivot)
@@ -72,7 +65,7 @@ void restore_stack(t_list *lst, int count)
     }
 }
 
-void sort_stack_a(t_list *lst, t_block *a_block, int size)
+void sort_stack_a(t_list *lst, t_block blocks, int size)
 {
     if (size > 1 && lst->stack_a[0] > lst->stack_a[1])
         sa(lst, 1);
@@ -84,45 +77,43 @@ void sort_stack_a(t_list *lst, t_block *a_block, int size)
     }
     if (size > 1 && lst->stack_a[0] > lst->stack_a[1])
         sa(lst, 1);
-    lst->bl_a_count = 1;
-    a_block->bl_size += size;
+    lst->sort_in_a += size;
 }
 
-void clear_stack_b(t_list *lst, t_block *a_block, t_block *b_block)
+void clear_stack_b(t_list *lst, t_block blocks)
 {
-    t_block *tmp_b;
     int flag;
 
     flag = 1;
-    tmp_b = b_block;
-    while(b_block->bl_size)
+    while (blocks.i > 0 && blocks.blocks[blocks.i] == 0)
+        blocks.i--;
+    if (blocks.blocks[blocks.i] == 0)
+        blocks.blocks[blocks.i] = lst->size_b;
+    while(blocks.blocks[blocks.i])
     {
         pa(lst, 1);
-        b_block->bl_size--;
+        blocks.blocks[blocks.i]--;
     }
-    if (lst->size_a - a_block->bl_size <= 3)
+    if (lst->size_a - lst->sort_in_a <= 3)
     {
-        sort_stack_a(lst, a_block, lst->size_a - a_block->bl_size);
+        sort_stack_a(lst, blocks, lst->size_a - lst->sort_in_a);
         flag = 0;
     }
-    lst->bl_b_count--;
-    tmp_b = b_block;
-    if (b_block->next)
-        b_block = b_block->next;
-    free(tmp_b);
+    if(blocks.i != 0)
+        blocks.i--;
     if (flag)
-        clear_stack_more(lst, a_block, b_block);
+        clear_stack_more(lst, blocks);
 }
 
-void clear_stack_a(t_list *lst, t_block *a_block, t_block *b_block)
+void clear_stack_a(t_list *lst, t_block blocks)
 {
     int pivot;
     int count;
 
     pivot = 0;
     count = 0;
-    pivot = find_pivot((const int *)lst->stack_a + a_block->bl_size, lst->size_a - a_block->bl_size);
-    count = find_count(lst->stack_a, lst->size_a - a_block->bl_size, pivot);
+    pivot = find_pivot((const int *)lst->stack_a, lst->size_a);
+    count = find_count(lst->stack_a, lst->size_a, pivot);
     while (count)
     {
         if (lst->stack_a[0] <= pivot)
@@ -133,11 +124,10 @@ void clear_stack_a(t_list *lst, t_block *a_block, t_block *b_block)
         else
             ra(lst, 1);
     }
-    if (lst->bl_b_count == 0)
-        b_block->bl_size = lst->size_b;
+    if (blocks.i == 0 && blocks.blocks[0] == 0)
+        blocks.blocks[blocks.i]= lst->size_b;
     else
-        b_block->bl_size = lst->size_b - dont_touch(b_block);
-    lst->bl_b_count++;
+        blocks.blocks[blocks.i] = lst->size_b - dont_touch(blocks);
 }
 
 void sort_three_elem(t_list *lst, t_block blocks)
@@ -175,7 +165,7 @@ void sort_three_elem(t_list *lst, t_block blocks)
         if (first > third && first < second)
             rra(lst, 1);
     }
-    blocks.sort_in_a = lst->size_a;
+    lst->sort_in_a = lst->size_a;
 }
 
 void sort(t_list *lst)
@@ -183,40 +173,30 @@ void sort(t_list *lst)
     t_block blocks;
     int check;
 
-    ft_bzero(&blocks, sizeof(blocks));
     check = lst->size_a;
+    ft_bzero(&blocks, sizeof(blocks));
+    blocks.blocks = NULL;
+    blocks.i = 0;
     if (lst->size_a <= 3)
         sort_three_elem(lst, blocks);
     else
     {
         while (lst->size_a > 3)
         {
-            if (!b_block)
-            {
-                a_block = (t_block *)ft_memalloc(sizeof(t_block));
-                b_block = (t_block *)ft_memalloc(sizeof(t_block));
-                a_block->next = NULL;
-                b_block->next = NULL;
-            }
-            else
-            {
-                node = (t_block *)ft_memalloc(sizeof(t_block));
-                ft_lstadd(&b_block, node);
-            }
-            clear_stack_a(lst, a_block, b_block);
+            if (!blocks.blocks)
+                blocks.blocks = (int *)ft_memalloc(sizeof(int) * 1024);
+            clear_stack_a(lst, blocks);
+            blocks.blocks[blocks.i] != 0 ? blocks.i++ : 0;
         }
-        sort_three_elem(lst, a_block);
-        lst->bl_a_count++;
-        a_block->bl_size = lst->size_a;
-        while(check > a_block->bl_size)
+        sort_three_elem(lst, blocks);
+        while(check > lst->sort_in_a)
         {
-            clear_stack_b(lst, a_block, b_block);
-            if (lst->bl_b_count == 0)
-                b_block->bl_size = lst->size_b;
+            clear_stack_b(lst, blocks);
+            if (blocks.i == 0 && blocks.blocks[0] == 0)
+                blocks.blocks[blocks.i]= lst->size_b;
             else
-                b_block->bl_size = lst->size_b - dont_touch(b_block);
-            if (b_block->next)
-                b_block = b_block->next;
+                blocks.blocks[blocks.i] = lst->size_b - dont_touch(blocks);
+            blocks.i++;
         }
     }
 }

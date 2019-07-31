@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 16:36:34 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/26 19:42:50 by mbeahan          ###   ########.fr       */
+/*   Created: 2018/11/22 17:10:20 by mbeahan           #+#    #+#             */
+/*   Updated: 2019/07/31 22:17:26 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstadd(t_block **alst, t_block *new)
+void	ft_bzero(void *s, size_t n)
 {
-	if (alst && new)
+	size_t i;
+
+	i = 0;
+	while (i < n)
 	{
-		new->next = *alst;
-		new->bl_size = 0;
-		*alst = new;
+		((char*)s)[i] = 0;
+		i++;
 	}
 }
