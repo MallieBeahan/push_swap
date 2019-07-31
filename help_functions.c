@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:49:32 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/30 23:27:26 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 21:25:55 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	initialize(t_list *lst, int ac)
 	lst->stack_b = (int *)ft_memalloc(sizeof(int) * ac - 1);
 	lst->size_a = ac - 1;
 	lst->size_b = 0;
+    lst->bl_a_count = 0;
+    lst->bl_b_count = 0;
 }
 
 t_list	*fill_lst(t_list *lst, int ac, char **av)

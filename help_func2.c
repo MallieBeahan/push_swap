@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:25:24 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/30 23:32:29 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 18:42:21 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int dont_touch(t_block *block)
             sum += block->bl_size;
             block = block->next;
         }
+        if (block && !block->next)
+            sum += block->bl_size;
     }
     return (sum);
 }

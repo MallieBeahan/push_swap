@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/30 23:30:28 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/07/31 21:26:50 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ typedef struct s_list
     int *stack_b;
     int size_a;
     int size_b;
+    int bl_a_count;
+    int bl_b_count;
 }              t_list;
 
 typedef struct s_block
 {
-    int            bl_size;
-    struct s_block *next;
-    
+    int            sort_in_a;
+    int            *blocks;
+    int            i;
 }              t_block;
 
 
@@ -58,7 +60,11 @@ void	sort(t_list *lst);
 void	init_blocks(t_block *block, t_list *lst);
 int     dont_touch(t_block *block);
 t_block *needed_block(t_block *block);
-void sort_three_elem(t_list *lst);
-int find_count(int *arr, int size, int med);
-
+void    sort_three_elem(t_list *lst, t_block *a_block);
+void    clear_stack_a(t_list *lst, t_block *a_block, t_block *b_block);
+void    clear_stack_b(t_list *lst, t_block *a_block, t_block *b_block);
+void    sort_stack_a(t_list *lst, t_block *a_block, int size);
+int     find_count(const int *stack, int size, int pivot);
+void    clear_stack_more(t_list *lst, t_block *a_block, t_block *b_block);
+void    restore_stack(t_list *lst, int count);
 #endif
