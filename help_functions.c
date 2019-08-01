@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:49:32 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/31 22:33:49 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/01 12:35:42 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	initialize(t_list *lst, int ac)
     lst->bl_a_count = 0;
     lst->bl_b_count = 0;
     lst->sort_in_a = 0;
+    lst->i = 0;
 }
 
 t_list	*fill_lst(t_list *lst, int ac, char **av)

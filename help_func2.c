@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:25:24 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/31 22:43:32 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/01 12:38:17 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int *sort_arr(int *arr, int size)
     return (arr);
 }
 
-int dont_touch(t_block blocks)
+int dont_touch(t_block blocks, int size)
 {
     int sum;
     int i;
 
     i = 0;
     sum = 0;
-    while(i < blocks.i + 1)
+    while(i < size + 1)
     {
         sum += blocks.blocks[i];
         i++;
