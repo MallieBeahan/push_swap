@@ -6,15 +6,17 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/01 12:38:13 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/03 23:24:52 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include "libft/libft.h"
+# include <stdio.h>
+# include <limits.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -22,10 +24,9 @@ typedef struct s_list
     int *stack_b;
     int size_a;
     int size_b;
-    int bl_a_count;
-    int bl_b_count;
     int sort_in_a;
     int i;
+    int visualize;
 }              t_list;
 
 typedef struct s_block
@@ -34,14 +35,8 @@ typedef struct s_block
     int            i;
 }              t_block;
 
-
-void	ft_bzero(void *s, size_t n);
-void	*ft_memalloc(size_t size);
-void	ft_putendl_fd(char const *s, int fd);
-char	**ft_strsplit(char const *s, char c);
-int		ft_atoi(char *str);
-void	ft_bzero(void *s, size_t n);
 void    initialize(t_list *lst, int ac);
+int     parse_flags(int *ac, char ***av, t_list *lst);
 t_list	*fill_lst(t_list *lst, int ac, char **av);
 void 	sa(t_list *lst, int print);
 void 	sb(t_list *lst, int print);
@@ -54,6 +49,7 @@ void    rr(t_list *lst);
 void    rra(t_list *lst, int print);
 void    rrb(t_list *lst, int print);
 void    rrr(t_list *lst);
+int     validate(char **av, char *ar, int begin);
 int		*copyarr(const int *arr, int k);
 int		*sort_arr(int *arr, int size);
 int		find_pivot(const int *arr, int size);
@@ -67,4 +63,7 @@ int     find_count(const int *stack, int size, int pivot);
 void    clear_stack_more(t_list *lst, t_block blocks);
 void    restore_stack(t_list *lst, int count);
 void    print_stack(t_list *lst);
+void    free_all(t_block blocks, t_list *lst);
+int     sorted(int *stack, int len);
+
 #endif

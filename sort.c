@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:31:12 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/01 13:39:00 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/03 20:58:32 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,6 @@ void clear_stack_more(t_list *lst, t_block blocks)
             blocks.blocks[lst->i] = lst->size_b - dont_touch(blocks, lst->i);
         }
         clear_stack_more(lst, blocks);
-    }
-}
-
-int find_count(const int *stack, int size, int pivot)
-{
-    int count;
-    int i;
-
-    count = 0;
-    i = 0;
-    while(i < size)
-    {
-        if(stack[i] <= pivot)
-            count++;
-        i++;
-    }
-    return (count);
-}
-
-void restore_stack(t_list *lst, int count)
-{
-    while (count)
-    {
-        rra(lst, 1);
-        count--;
     }
 }
 
@@ -214,4 +189,5 @@ void sort(t_list *lst)
             clear_stack_b(lst, blocks);
     }
     //print_stack(lst);
+    free_all(blocks, lst);
 }

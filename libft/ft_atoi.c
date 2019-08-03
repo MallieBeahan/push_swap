@@ -6,13 +6,13 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 16:53:41 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/30 22:31:34 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/03 21:43:43 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int		ft_atoi(char *str)
+long		ft_atoi(char *str)
 {
 	long	nb;
 	int		isnegative;

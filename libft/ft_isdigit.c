@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 13:57:43 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/07/25 12:55:23 by mbeahan          ###   ########.fr       */
+/*   Created: 2018/12/01 15:01:01 by mbeahan           #+#    #+#             */
+/*   Updated: 2019/08/03 21:42:26 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	*ft_memalloc(size_t size)
+int		ft_isdigit(int c)
 {
-	size_t			i;
-	unsigned char	*str;
-
-	i = 0;
-	str = (unsigned char *)malloc(sizeof(unsigned char) * size);
-	if (str)
-	{
-		while (i < size)
-		{
-			str[i] = '\0';
-			i++;
-		}
-		return (str);
-	}
-	return (NULL);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
