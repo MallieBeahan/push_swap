@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:25:24 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/03 23:01:26 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/03 23:55:46 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,6 @@ void restore_stack(t_list *lst, int count)
     {
         rra(lst, 1);
         count--;
-    }
-}
-
-void print_stack(t_list *lst)
-{
-    int i;
-
-    i = 0;
-    printf("Your stack is:\n");
-    while (i < lst->size_a)
-    {
-        printf("%d\n", lst->stack_a[i]);
-        i++;
     }
 }
 
