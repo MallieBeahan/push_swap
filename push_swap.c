@@ -6,7 +6,7 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 19:26:10 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/03 23:03:09 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:54:56 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,7 @@ int main (int ac, char **av)
     initialize(lst, ac);
     lst = fill_lst(lst, ac, av);
     if (sorted(lst->stack_a, lst->size_a))
-    {
-        free(lst->stack_a);
-        free(lst->stack_b);
-        free(lst);
-    }
+        free_lst(lst);
     else
         sort(lst);
     return (0);

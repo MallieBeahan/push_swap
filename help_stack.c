@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help_func2.c                                       :+:      :+:    :+:   */
+/*   help_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 21:25:24 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/03 23:55:46 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:52:28 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,6 @@ int *sort_arr(int *arr, int size)
         i++;
     }
     return (arr);
-}
-
-int dont_touch(t_block blocks, int size)
-{
-    int sum;
-    int i;
-
-    i = 0;
-    sum = 0;
-    while(i < size + 1)
-    {
-        sum += blocks.blocks[i];
-        i++;
-    }
-    return (sum);
 }
 
 void    free_all(t_block blocks, t_list *lst)

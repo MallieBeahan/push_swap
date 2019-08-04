@@ -6,16 +6,17 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:15:20 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/03 23:24:52 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:49:09 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include <stdlib.h>
+# define BLOCK_SIZE 1024
 # include "libft/libft.h"
-# include <stdio.h>
 # include <limits.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 
 typedef struct s_list
@@ -65,5 +66,8 @@ void    restore_stack(t_list *lst, int count);
 void    print_stack(t_list *lst);
 void    free_all(t_block blocks, t_list *lst);
 int     sorted(int *stack, int len);
+int     find_size(t_list *lst, t_block blocks);
+int     cycle_drop(t_list *lst, int count, int pivot);
+void    free_lst(t_list *lst);
 
 #endif

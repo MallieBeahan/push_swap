@@ -1,9 +1,5 @@
 {
     "files.associations": {
-        "push_swap.h": "c",
-        "unistd.h": "c",
-        "limits.h": "c",
-        "types.h": "c",
-        "fcntl.h": "c"
+        "push_swap.h": "c"
     }
 }

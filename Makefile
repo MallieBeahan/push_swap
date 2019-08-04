@@ -6,7 +6,7 @@
 #    By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 21:10:35 by mbeahan           #+#    #+#              #
-#    Updated: 2019/08/03 23:24:14 by mbeahan          ###   ########.fr        #
+#    Updated: 2019/08/04 17:59:04 by mbeahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,12 @@ NAME2 = checker
 LIB = -I libft/libft.h -L./libft -lft
 PRINTF = -I ft_printf/include/ft_printf.h -L./ft_printf -l ftprintf
 
-SRC =   first_op.c \
-		help_func2.c \
-		help_functions.c \
-		second_op.c \
+SRC =   args_ops.c \
+		first_ops.c \
+		help_stack.c \
+		help_stack2.c \
+		help_stack3.c \
+		second_ops.c \
 		sort.c 
 		
 OBJ = $(SRC:.c=.o)
@@ -50,7 +52,7 @@ fclean: clean
 re: fclean all
 
 debugp:
-	 gcc -ggdb  first_op.c help_func2.c help_functions.c push_swap.c second_op.c sort.c $(LIB) $(PRINTF)
+	 gcc -ggdb  args_ops.c first_ops.c help_stack.c help_stack2.c help_stack3.c push_swap.c second_ops.c sort.c $(LIB) $(PRINTF)
 
 debugc:
-	gcc -ggdb first_op.c help_func2.c help_functions.c checker.c second_op.c sort.c $(LIB) $(PRINTF)
+	gcc -ggdb first_ops.c help_func2.c help_functions.c checker.c second_ops.c sort.c $(LIB) $(PRINTF)
