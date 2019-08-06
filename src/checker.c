@@ -6,11 +6,11 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 22:29:07 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/04 17:51:05 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:00:17 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static int	get_op(t_list *lst, char *op)
 {
@@ -84,7 +84,7 @@ int			main(int ac, char **av)
 
 	(ac-- == 1) ? exit(0) : av++;
 	lst = (t_list *)malloc(sizeof(t_list));
-	flags = parse_flags(&ac, &av, lst);
+	flags = parse_ops(&ac, &av, lst);
 	if (ac == 1)
 		get_args(ac, av, lst);
 	initialize(lst, ac);

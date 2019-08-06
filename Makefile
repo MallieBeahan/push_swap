@@ -6,53 +6,48 @@
 #    By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 21:10:35 by mbeahan           #+#    #+#              #
-#    Updated: 2019/08/04 17:59:04 by mbeahan          ###   ########.fr        #
+#    Updated: 2019/08/06 20:11:55 by mbeahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1 = push_swap
+PUSH_SWAP = push_swap
 
-NAME2 = checker
+CHECKER = checker
 
 LIB = -I libft/libft.h -L./libft -lft
 PRINTF = -I ft_printf/include/ft_printf.h -L./ft_printf -l ftprintf
 
-SRC =   args_ops.c \
-		first_ops.c \
-		help_stack.c \
-		help_stack2.c \
-		help_stack3.c \
-		second_ops.c \
-		sort.c 
-		
+SRC =   src/args_ops.c \
+		src/first_ops.c \
+		src/help_stack.c \
+		src/help_stack2.c \
+		src/help_stack3.c \
+		src/second_ops.c \
+		src/sort.c \
+		src/visualize.c
+
 OBJ = $(SRC:.c=.o)
 
 HEADER = -I push_swap.h
 
-all: $(NAME1) $(NAME2)
+all: $(PUSH_SWAP) $(CHECKER)
 
-$(NAME1):  $(OBJ)
+$(PUSH_SWAP):  $(OBJ)
 	make -C libft/
 	make -C ft_printf/
-	gcc -Wall -Wextra -Werror $(OBJ) push_swap.c -o $(NAME1) $(LIB) $(PRINTF)
+	gcc -Wall -Wextra -Werror $(OBJ) src/push_swap.c -o $(PUSH_SWAP) $(LIB) $(PRINTF)
 
-$(NAME2):  $(OBJ)
-	gcc -Wall -Wextra -Werror $(OBJ) checker.c -o $(NAME2) $(LIB) $(PRINTF)
+$(CHECKER):  $(OBJ)
+	gcc -Wall -Wextra -Werror $(OBJ) src/checker.c -o $(CHECKER) $(LIB) $(PRINTF)
 
 clean:
 	rm -rf libft/*.o
 	rm -rf ft_printf/temporary/*.o
-	rm -rf *.o
+	rm -rf src/*.o
 
 fclean: clean
-	rm -rf $(NAME1)
+	rm -rf $(PUSH_SWAP) $(CHECKER)
 	rm -rf libft/libft.a
 	rm -rf ft_printf/libftprintf.a
 
 re: fclean all
-
-debugp:
-	 gcc -ggdb  args_ops.c first_ops.c help_stack.c help_stack2.c help_stack3.c push_swap.c second_ops.c sort.c $(LIB) $(PRINTF)
-
-debugc:
-	gcc -ggdb first_ops.c help_func2.c help_functions.c checker.c second_ops.c sort.c $(LIB) $(PRINTF)

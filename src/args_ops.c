@@ -6,11 +6,11 @@
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 15:59:03 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/04 17:56:43 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:00:12 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	initialize(t_list *lst, int ac)
 {
@@ -22,7 +22,7 @@ void	initialize(t_list *lst, int ac)
 	lst->i = 0;
 }
 
-int		parse_flags(int *ac, char ***av, t_list *lst)
+int		parse_ops(int *ac, char ***av, t_list *lst)
 {
 	int i;
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first_op.c                                         :+:      :+:    :+:   */
+/*   first_ops.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:05:52 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/03 23:50:30 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:00:19 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void 	sa(t_list *lst, int print)
+void	sa(t_list *lst, int print)
 {
 	int tmp;
 
@@ -21,11 +21,13 @@ void 	sa(t_list *lst, int print)
 	tmp = lst->stack_a[0];
 	lst->stack_a[0] = lst->stack_a[1];
 	lst->stack_a[1] = tmp;
-	if(print)
-        write(1, "sa\n", 3);
+	if (print)
+		write(1, "sa\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }
 
-void 	sb(t_list *lst, int print)
+void	sb(t_list *lst, int print)
 {
 	int tmp;
 
@@ -34,8 +36,10 @@ void 	sb(t_list *lst, int print)
 	tmp = lst->stack_b[0];
 	lst->stack_b[0] = lst->stack_b[1];
 	lst->stack_b[1] = tmp;
-	if(print)
-        write(1, "sb\n", 3);
+	if (print)
+		write(1, "sb\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }
 
 void	ss(t_list *lst)
@@ -45,6 +49,8 @@ void	ss(t_list *lst)
 		sa(lst, 0);
 		sb(lst, 0);
 		write(1, "ss\n", 3);
+		if (lst->visualize)
+			visualize(lst);
 	}
 }
 
@@ -63,8 +69,10 @@ void	pa(t_list *lst, int print)
 		lst->stack_b[i - 1] = lst->stack_b[i];
 	lst->size_a++;
 	lst->size_b--;
-	if(print)
+	if (print)
 		write(1, "pa\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }
 
 void	pb(t_list *lst, int print)
@@ -82,6 +90,8 @@ void	pb(t_list *lst, int print)
 		lst->stack_a[i - 1] = lst->stack_a[i];
 	lst->size_b++;
 	lst->size_a--;
-	if(print)
+	if (print)
 		write(1, "pb\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }

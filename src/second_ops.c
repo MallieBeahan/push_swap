@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   second_op.c                                        :+:      :+:    :+:   */
+/*   second_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbeahan <mbeahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:05:46 by mbeahan           #+#    #+#             */
-/*   Updated: 2019/08/04 00:00:55 by mbeahan          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:00:29 by mbeahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ra(t_list *lst, int print)
 {
@@ -29,6 +29,8 @@ void	ra(t_list *lst, int print)
 	lst->stack_a[i - 1] = tmp;
 	if (print)
 		write(1, "ra\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }
 
 void	rb(t_list *lst, int print)
@@ -48,6 +50,8 @@ void	rb(t_list *lst, int print)
 	lst->stack_b[i - 1] = tmp;
 	if (print)
 		write(1, "rb\n", 3);
+	if (lst->visualize)
+		visualize(lst);
 }
 
 void	rr(t_list *lst)
@@ -57,6 +61,8 @@ void	rr(t_list *lst)
 		ra(lst, 0);
 		rb(lst, 0);
 		write(1, "rr\n", 3);
+		if (lst->visualize)
+			visualize(lst);
 	}
 }
 
@@ -77,6 +83,8 @@ void	rra(t_list *lst, int print)
 	lst->stack_a[0] = tmp;
 	if (print)
 		write(1, "rra\n", 4);
+	if (lst->visualize)
+		visualize(lst);
 }
 
 void	rrb(t_list *lst, int print)
@@ -96,4 +104,6 @@ void	rrb(t_list *lst, int print)
 	lst->stack_b[0] = tmp;
 	if (print)
 		write(1, "rrb\n", 4);
+	if (lst->visualize)
+		visualize(lst);
 }
